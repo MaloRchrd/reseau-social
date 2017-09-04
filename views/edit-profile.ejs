@@ -1,0 +1,215 @@
+<html lang="en">
+
+<head>
+	<title>Edit profile</title>
+    <% include ./partials/head %>
+</head>
+
+<body class="landing-page">
+    <!-- Navbar -->
+	<!-- <% include ./partials/nav %> -->
+    <!-- End Navbar -->
+    <div class="wrapper">
+        <!-- <div class="page-header page-header-small">
+            <div class="page-header-image" data-parallax="true" style="background-image: url('/img/bg-10.jpg');">
+            </div>
+            <div class="container">
+                <div class="content-center">
+                    <h1 class="title">Hey, welcome in the community !</h1>
+                </div>
+            </div>
+        </div> -->
+        <div class="section section-about-us">
+			<div class="container">
+                    <div class="row">
+                        <div class="col-md-10 offset-md-1 col-xl-10 offset-xl-1">
+                            <h3 class="title" style="text-align:center;">You can edit your profile informations</h3>
+                            <!-- Nav tabs -->
+                            <div class="card">
+                                <ul class="nav nav-tabs nav-tabs-neutral justify-content-center" role="tablist" data-background-color="orange">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" data-toggle="tab" href="#info" role="tab" aria-expanded="true">
+                                            <i class="fa fa-address-card-o"></i> Profile info
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-toggle="tab" href="#work" role="tab" aria-expanded="false">
+                                            <i class="fa fa-hand-peace-o"></i> Work /  Interest
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-toggle="tab" href="#messages" role="tab" aria-expanded="false">
+                                            <i class="fa fa-globe"></i> Social Media
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-toggle="tab" href="#settings" role="tab" aria-expanded="false">
+                                            <i class="fa fa-cogs"></i> Settings
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="card-block">
+                                    <!-- Tab panes -->
+                                    <div class="tab-content text-center">
+                                        <div class="tab-pane active" id="info" role="tabpanel" aria-expanded="true">
+											<div class="row">
+												<div class="col-sm-12">
+			                                    	<div class="picture-container">
+			                                        	<div class="picture">
+	                                        				<img src="<%= user.profile.img %>" class="rounded-circle img-raised" id="picturePreview" title="" style="width:200px;height:200px;"/>
+															<br>
+															<br>
+			                                            	<input class="btn btn-primary" type="file" id="picture">
+															<br>
+															<br>
+			                                        	</div>
+			                                    	</div>
+			                                	</div>
+
+												<div class="col-sm-12 col-lg-6">
+													<h6>Pseudonyme</h6>
+					                                <div id="valid" class="form-group">
+					                                    <input id="pseudonyme" type="text" class="form-control" name="pseudonyme" placeholder="Doe" value="<%= user.profile.pseudonyme %>" disabled>
+					                                </div>
+					                            </div>
+												<div class="col-sm-12 col-lg-6">
+													<h6>Name</h6>
+					                                <div class="form-group">
+					                                    <input type="text" class="form-control" name="name" placeholder="Doe" value="<%= user.profile.name %>">
+					                                </div>
+					                            </div>
+					                            <div class="col-sm-12 col-lg-6">
+													<h6>First Name</h6>
+					                                <div class="form-group">
+					                                    <input type="text" class="form-control" name="firstName" placeholder="John" value="<%= user.profile.firstName %>">
+					                                </div>
+					                            </div>
+					                            <div class="col-sm-12 col-lg-6">
+													<h6>Email</h6>
+					                                <div class="form-group">
+					                                    <input type="email" class="form-control"name="email" placeholder="john@doe.com" value="<%= user.local.email %>">
+					                                </div>
+					                            </div>
+					                            <div class="col-sm-12 col-lg-6">
+													<h6>Phone</h6>
+					                                <div class="form-group">
+					                                    <input type="text" class="form-control" name="phone"placeholder="0612345678" value="<%= user.profile.phone %>">
+					                                </div>
+					                            </div>
+												<div class="col-sm-12 col-lg-6">
+													<h6>Work</h6>
+					                                <div class="form-group">
+					                                    <input type="text" class="form-control" name="work" placeholder="Web dev" value="<%= user.profile.work %>">
+					                                </div>
+					                            </div>
+
+
+
+					                        </div>
+                                        </div>
+                                        <div class="tab-pane" id="work" role="tabpanel" aria-expanded="false">
+											<div class="row">
+					                            <div class="col-sm-12 col-lg-6">
+													<h6>Birthdate</h6>
+					                                <div class="form-group">
+					                                    <input type="text" class="form-control date-picker" value="<%= user.profile.birthdate %>"/ data-datepicker-color="">
+					                                </div>
+					                            </div>
+					                            <div class="col-sm-12 col-lg-6">
+													<h6>Gender</h6>
+													<div class="radio">
+													    <input type="radio" name="gender" id="man" value="man">
+													    <label for="man">
+													        Man
+													    </label>
+														<input type="radio" name="gender" id="woman" value="woman">
+													    <label for="woman">
+													        Woman
+													    </label>
+													</div>
+
+													<div class="radio">
+
+													</div>
+												</div>
+												<br><br>
+												<br><br>
+					                            <div class="col-sm-12 col-lg-12">
+													<h6>About</h6>
+													<div class="textarea-container">
+														<textarea class="form-control" name="about" rows="4" cols="80" placeholder="Say something about yourself..."><%= user.profile.about %></textarea>
+													</div>
+					                            </div>
+					                        </div>
+                                        </div>
+                                        <div class="tab-pane" id="messages" role="tabpanel" aria-expanded="false">
+											<div class="row">
+
+					                            <div class="col-sm-12 col-lg-6">
+													<h6>Facebook</h6>
+					                                <div class="form-group">
+					                                    <input type="text" class="form-control" name="facebook" placeholder="www.Facebook.com/username" value="<%= user.profile.facebook %>">
+					                                </div>
+					                            </div>
+					                            <div class="col-sm-12 col-lg-6">
+													<h6>Twitter</h6>
+					                                <div class="form-group">
+					                                    <input type="text" class="form-control" name="twitter" placeholder="www.twitter.com/username" value="<%= user.profile.twitter %>">
+					                                </div>
+					                            </div>
+					                            <div class="col-sm-12 col-lg-6">
+													<h6>Linkedin</h6>
+					                                <div class="form-group">
+					                                    <input type="email" class="form-control" name="linkedin" placeholder="www.linkedin.com/username" value="<%= user.profile.linkedin %>">
+					                                </div>
+					                            </div>
+					                            <div class="col-sm-12 col-lg-6">
+													<h6>Github</h6>
+					                                <div class="form-group">
+					                                    <input type="text" class="form-control" name="github" placeholder="www.github.com/username" value="<%= user.profile.github %>">
+					                                </div>
+					                            </div>
+					                            <div class="col-sm-12 col-lg-6">
+													<h6>instagram</h6>
+					                                <div class="form-group">
+					                                    <input type="text" class="form-control" name="instagram" placeholder="www.instagram.com/username" value="<%= user.profile.instagram %>">
+					                                </div>
+					                            </div>
+					                            <div class="col-sm-12 col-lg-6">
+													<h6>Dribbble</h6>
+					                                <div class="form-group">
+					                                    <input type="text" class="form-control" name="dribbble" placeholder="www.dribbble.com/username" value="<%= user.profile.dribble %>">
+					                                </div>
+					                            </div>
+
+					                        </div>
+
+                                        </div>
+                                        <div class="tab-pane" id="settings" role="tabpanel" aria-expanded="false">
+											<h6>Recieve Notification (by email)</h6>
+											<input type="checkbox" name="checkbox" class="bootstrap-switch"
+											      data-on-label="Yes"
+											      data-off-label="No"
+											checked/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+							<a id="submit" class="btn btn-lg btn-primary pull-right">Submit</a>
+                        </div>
+                    </div>
+                </div>
+        </div>
+
+    </div>
+</body>
+<script
+  src="https://code.jquery.com/jquery-3.2.1.js"
+  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+  crossorigin="anonymous"></script>
+<script src="/js/onboarding.js" type="text/javascript"></script>
+
+
+<% include ./partials/footer %>
+
+</html>

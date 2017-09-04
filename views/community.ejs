@@ -1,0 +1,166 @@
+<html lang="en">
+
+<head>
+    <% include ./partials/head %>
+	<title>Community</title>
+</head>
+
+<body class="landing-page">
+    <!-- Navbar -->
+    <% include ./partials/nav-connected %>
+    <!-- End Navbar -->
+		    <div class="wrapper">
+		        <div class="page-header page-header-small">
+		            <div class="page-header-image" data-parallax="true" style="background-image: url('/img/bg6.jpg');">
+		            </div>
+		            <div class="container">
+		                <div class="content-center">
+		                    <h1 class="title">Welcome in the community.</h1>
+							<br>
+							<div class="col-md-4 offset-md-4">
+
+								<div class="input-group form-group-no-border ">
+									<input id="search" type="text" class="form-control" placeholder="Search by username">
+									<span class="input-group-addon">
+										<i class="now-ui-icons ui-1_zoom-bold" style="color:#fff"></i>
+									</span>
+								</div>
+								<br><br>
+							</div>
+		                </div>
+		            </div>
+		        </div>
+		    </div>
+			<!-- Modal Core -->
+			<div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			        <h4 class="modal-title" id="myModalLabel">Filter the Community</h4>
+			      </div>
+			      <div class="modal-body">
+					<div class=" col-md-2">
+						<div class="checkbox">
+							<input id="Geek" type="checkbox">
+							<label for="Geek">
+								Geek
+							</label>
+							<input id="Business" type="checkbox">
+							<label for="Business">
+								Business
+							</label>
+							<input id="Video" type="checkbox">
+							<label for="Video">
+								Video
+							</label>
+							<input id="Design" type="checkbox">
+							<label for="Design">
+								Design
+							</label>
+							<input id="Marketing" type="checkbox">
+							<label for="Marketing">
+								Marketing
+							</label>
+							<input id="Volunteer" type="checkbox">
+							<label for="Volunteer">
+								Volunteer
+							</label>
+						</div>
+					</div>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-default btn-simple" data-dismiss="modal">Close</button>
+			        <button type="button" class="btn btn-info btn-simple">Filter</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+
+			<div class="section section-team text-center ">
+            <div class="container">
+                <!-- <h2 class="title">Here is our team</h2> -->
+                <div class="team">
+                    <div class="row" id="community">
+						<% for (var i = 0; i < users.length; i++) { %>
+							<div class="col-md-4">
+	                            <div class="team-player">
+	                                <img src="<%= users[i].profile.img %>" alt="Thumbnail Image" class="rounded-circle img-fluid img-raised">
+	                                <h4 class="title"><%= users[i].profile.firstName %> <%=  users[i].profile.name %></h4>
+	                                <p class="category text-primary"><%=  users[i].profile.work %></p>
+	                                <p class="description"><%=  users[i].profile.about %></p>
+									<a href="/profile/<%=  users[i].profile.pseudonyme %>" class="btn btn-primary btn-round btn-lg">Profile</a>
+									<br>
+									<br>
+	                                <!-- <a href="#<%=  users[i].profile.twitter %>" class="btn btn-primary btn-icon btn-icon-mini"><i class="fa fa-twitter"></i></a>
+	                                <a href="<%=  users[i].profile.instagram %>" class="btn btn-primary btn-icon btn-icon-mini"><i class="fa fa-instagram"></i></a>
+	                                <a href="#<%=  users[i].profile.facebook %>" class="btn btn-primary btn-icon btn-icon-mini"><i class="fa fa-facebook-square"></i></a> -->
+	                            </div>
+	                        </div>
+					   <% } %>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+		<% include ./partials/getintouch %>
+		<% include ./partials/footer-nav %>
+		<% include ./partials/footer %>
+		<script type="text/javascript">
+			$( document ).ready(function() {
+				var community = document.querySelector('#community')
+				// data -->  array of friends
+				var Friends = function(data) {
+					for (var i = 0; i < data.length; i++) {
+						this.container = document.createElement('div');
+						this.container.setAttribute('class', 'col-md-4')
+						this.user = document.createElement('div');
+						this.user.setAttribute('class','team-player')
+						this.img = document.createElement('img');
+						this.img.setAttribute('class','rounded-circle img-fluid img-raised')
+						this.img.src = data[i].profile.img;
+						this.pseudonyme = document.createElement('p');
+						this.pseudonyme.setAttribute('class','category text-primary');
+						this.pseudonyme.innerHTML = data[i].profile.pseudonyme;
+						this.work = document.createElement('p');
+						this.work.setAttribute('class','category');
+						this.work.innerHTML = data[i].profile.work;
+						this.about = document.createElement('p');
+						this.about.setAttribute('class','description');
+						this.about.innerHTML = data[i].profile.about;
+						this.profile = document.createElement('a');
+						this.profile.setAttribute('class','btn btn-primary btn-round btn-lg')
+						this.profile.setAttribute('href', '/profile/' + data[i].profile.pseudonyme);
+						this.profile.innerText = 'Profile';
+						this.container.appendChild(this.user);
+						this.user.appendChild(this.img);
+						this.user.appendChild(this.pseudonyme);
+						this.user.appendChild(this.work);
+						this.user.appendChild(this.about);
+						this.user.appendChild(this.profile);
+						community.appendChild(this.container);
+					}
+				};
+
+				$('#search').keyup(function() {
+					setTimeout(function () {
+						var friendsSearch = $('#search').val();
+
+						$.post( "/communitySearch", {friendsSearch : friendsSearch} , function( data ) {
+							console.log(data);
+							community.innerHTML = "";
+							if (data.length < 1) {
+								// alert('yo')
+								community.innerHTML ='<h3 class="text-primary" style="text-align: center;">Sorry no friends with this username</h3>';
+							}
+							new Friends(data);
+						});
+					}, 500);
+				})
+			});
+		</script>
+
+    </div>
+</body>
+
+</html>

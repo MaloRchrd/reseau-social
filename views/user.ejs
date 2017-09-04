@@ -1,0 +1,160 @@
+
+
+
+<head>
+    <% include ./partials/head %>
+	<title>Profile</title>
+</head>
+
+<body class="profile-page">
+    <% include ./partials/nav-connected %>
+    <!-- End Navbar -->
+    <div class="wrapper">
+        <div class="page-header page-header-small" filter-color="orange">
+            <div class="page-header-image" data-parallax="true" style="background-image: url('/img/bg5.jpg');">
+            </div>
+            <div class="container">
+                <div class="content-center">
+                    <div class="photo-container">
+                        <img src="<%= user.profile.img %>" alt="">
+                    </div>
+                    <!-- <h3 class="title"><%= user.profile.firstName %>  <%= user.profile.name %>
+						<strong>id</strong>: <%= user._id %><br>
+                        <strong>email</strong>: <%= user.local.email %><br>
+					</h3> -->
+					<% if(user.profile.gender = "man"){ %>
+						<br>
+							<i class="fa fa-male"></i><p class=""><%= user.profile.pseudonyme %> </p>
+					 <% } else {%>
+						 <br>
+							 <i class="fa fa-female"></i><p class=""><%= user.profile.pseudonyme %> </p>
+					 <% } %>
+					 <div class="content-center">
+						 <p class=""><i class="fa fa-birthday-cake"></i> <%= user.profile.birthdate %> </p>
+
+					 </div>
+					<p class="category"><i class="fa fa-briefcase"></i> <%= user.profile.work %> </p>
+					<br>
+					<br>
+					<div class="btn-group">
+						<% if(user.profile.facebook){ %>
+							<a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="<%= user.profile.facebook %>" target="_blank">
+ 						   		<i class="fa fa-facebook"></i>
+ 						   		<p class="hidden-lg-up">Facebook</p>
+ 					   		</a>
+						 <% }  %>
+
+						<% if(user.profile.linkedin){ %>
+						<a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="<%= user.profile.linkedin %>" target="_blank">
+							<i class="fa fa-linkedin"></i>
+							<p class="hidden-lg-up">Linkedin</p>
+						</a>
+						<% }  %>
+						<% if(user.profile.twitter){ %>
+						<a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="<%= user.profile.twitter %>" target="_blank">
+							<i class="fa fa-twitter"></i>
+							<p class="hidden-lg-up">Twitter</p>
+						</a>
+						<% }  %>
+						<% if(user.profile.instagram){ %>
+						<a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="<%= user.profile.instagram %>" target="_blank">
+							<i class="fa fa-instagram"></i>
+							<p class="hidden-lg-up">Instagram</p>
+						</a>
+						<% }  %>
+						<% if(user.profile.github){ %>
+						<a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="<%= user.profile.github %>" target="_blank">
+							<i class="fa fa-github"></i>
+							<p class="hidden-lg-up">Github</p>
+						</a>
+						<% }  %>
+						<% if(user.profile.dribbble){ %>
+						<a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="<%= user.profile.dribbble %>" target="_blank">
+							<i class="fa fa-dribbble"></i>
+							<p class="hidden-lg-up">Dribbble</p>
+						</a>
+						<% }  %>
+						<% if(user.profile.email){ %>
+						<a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="<%= user.profile.email %>" target="_blank">
+							<i class="fa fa-envelope-o"></i>
+							<p class="hidden-lg-up">Email</p>
+						</a>
+						<% }  %>
+					</div>
+                </div>
+            </div>
+        </div>
+        <div class="section">
+            <div class="container">
+                <div class="button-container">
+                    <a id="connect" href="" class="btn btn-primary btn-lg">Connect</a>
+					<h3 class="title">About me</h3>
+	                <h5 class="description"><%= user.profile.about %></h5>
+	                <div class="row">
+	                    <div class="col-md-6 offset-md-3">
+	                        <div class="nav-align-center">
+	                            <ul class="nav nav-pills nav-pills-primary" role="tablist">
+	                                <li class="nav-item">
+	                                    <a class="nav-link" href="/profile/<%= user.profile.pseudonyme %>/contact" role="tablist">
+	                                        <i class="fa fa-address-book-o"></i>
+	                                    </a>
+	                                </li>
+	                                <li class="nav-item">
+	                                    <a class="nav-link active"  href="/profile/<%= user.profile.pseudonyme %>/friends" role="tablist">
+	                                        <i class="fa fa-users"></i>
+	                                    </a>
+	                                </li>
+	                                <li class="nav-item">
+	                                    <a class="nav-link" href="/profile/<%= user.profile.pseudonyme %>/comments" role="tablist">
+	                                        <i class="fa fa-comments"></i>
+	                                    </a>
+	                                </li>
+	                            </ul>
+	                        </div>
+	                    </div>
+	                </div>
+                </div>
+
+            </div>
+        </div>
+        <footer class="footer footer-default">
+            <div class="container">
+                <nav>
+                    <ul>
+						<li class="nav-item" style="text-align : center;">
+	                        <a class="nav-link"  title="Community" data-placement="bottom" href="/user/profile" target="_blank">
+	                            <i class="fa fa-users"></i>
+	                            <!-- <p class="hidden-lg-up">Community</p> -->
+	                        </a>
+	                    </li>
+	                    <li class="nav-item">
+	                        <a class="nav-link"  title="Chat" data-placement="bottom" href="/user/chat" target="_blank">
+	                            <i class="fa fa-comments"></i>
+	                            <!-- <p class="hidden-lg-up">Chat</p> -->
+	                        </a>
+	                    </li>
+	                    <li class="nav-item">
+	                        <a class="nav-link" title="Profile" data-placement="bottom" href="/user/profile" target="_blank">
+	                            <i class="fa fa-user-circle-o"></i>
+	                            <!-- <p class="hidden-lg-up">Profile</p> -->
+	                        </a>
+	                    </li>
+                    </ul>
+                </nav>
+            </div>
+        </footer>
+    </div>
+</body>
+
+<% include ./partials/footer %>
+<script type="text/javascript">
+$('#connect').click(function() {
+
+	$.post( "/addfriend/<%= user.profile.pseudonyme %>", function( data ) {
+		if (data == "updated") {
+			window.location = '/profile'
+		}
+	});
+})
+</script>
+</html>

@@ -1,0 +1,173 @@
+<html lang="en">
+
+<head>
+    <% include ./partials/head %>
+	<title>Community</title>
+</head>
+
+<body class="landing-page">
+	<% include ./partials/nav-connected %>
+	<div class="page-header page-header-small">
+		<!-- <div class="page-header-image" data-parallax="true" style="background-image: url('/img/bg-team.jpg');height:100%;">
+		</div> -->
+		<% if (friends.length <  1) { %>
+		<div class="page-header-image" data-parallax="true" style="background-image: url('/img/bg-team.jpg'); height:100%!important;">
+		</div>
+		<div class="container">
+			<div class="content-center">
+				<h1 class="title">No friend yet  </h1>
+					 <p><br> Find some in the community </p>
+					 <a href="/community/" class="btn btn-primary btn-lg">Community</a>
+
+			</div>
+			</div>
+		</div>
+		<% } else{ %>
+			<div class="page-header-image" data-parallax="false" style="background-image: url('/img/bg-team.jpg');">
+			</div>
+			<div class="container">
+				<div class="content-center">
+					<h1 class="title">Friends </h1>
+					<div class="col-md-4 offset-md-4">
+
+						<div class="input-group form-group-no-border ">
+							<input id="search" type="text" class="form-control" placeholder="Search by username">
+							<span class="input-group-addon">
+								<i class="now-ui-icons ui-1_zoom-bold" style="color:#fff"></i>
+							</span>
+						</div>
+						<br><br>
+					</div>
+				</div>
+				</div>
+			</div>
+			<div class="section section-team text-center ">
+            <div class="container">
+                <!-- <h2 class="title">Here is our team</h2> -->
+                <div class="team">
+
+                    <div id="friends" class="row">
+						<% for (var i = 0; i < friends.length; i++) { %>
+							<div class="col-md-4">
+	                            <div class="team-player">
+									<img src="<%= friends[i].profile.img %>" alt="Thumbnail Image" class="rounded-circle img-fluid img-raised">
+									<br>
+									<br>
+	                                <p class="category text-primary"><em><%=  friends[i].profile.pseudonyme %></em></p>
+									<p class="category"><%=  friends[i].profile.work %></p>
+	                                <p class="description"><%=  friends[i].profile.about %></p>
+
+									<a href="/profile/<%=  friends[i].profile.pseudonyme %>"  rel="tooltip" data-placement="bottom" title="<%=  friends[i].profile.pseudonyme %> 's profile" class="btn btn-primary btn-icon  btn-icon-mini btn-round">
+										<i class="fa fa-user-circle-o"></i>
+									</a>
+									<a href="/chat/<%=  friends[i].profile.pseudonyme %>" rel="tooltip"  data-placement="bottom" title="Chat with <%=  friends[i].profile.pseudonyme %>" class="btn btn-success btn-icon  btn-icon-mini btn-round">
+										<i class="fa fa-comments"></i>
+									</a>
+									<a href="/remove/<%=  friends[i]._id%>"  rel="tooltip" title="Remove <%=  friends[i].profile.pseudonyme %> from friends"  data-placement="bottom" class="btn btn-danger btn-icon  btn-icon-mini btn-round">
+										<i class="fa fa-user-times"></i>
+									</a>
+									<!-- <a href="/remove/<%=  friends[i]._id%>" title="remove" class="btn btn-icon-mini btn-danger btn-round"><i class="fa fa-times" aria-hidden="true"></i></a> -->
+									<br>
+									<br>
+
+	                            </div>
+	                        </div>
+					   <% } %>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+		<% } %>
+
+
+		<% include ./partials/footer-nav %>
+		<script
+		  src="https://code.jquery.com/jquery-3.2.1.js"
+		  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+		  crossorigin="anonymous"></script>
+		  <script src="/js/friends.js" type="text/javascript"></script>
+		<script type="text/javascript">
+			// $( document ).ready(function() {
+			// 	var friends = document.querySelector('#friends')
+			// 	// data -->  array of friends
+			// 	var Friends = function(data) {
+			// 		for (var i = 0; i < data.length; i++) {
+			// 			this.container = document.createElement('div');
+			// 			this.container.setAttribute('class', 'col-md-4')
+			// 			this.user = document.createElement('div');
+			// 			this.user.setAttribute('class','team-player')
+			// 			this.img = document.createElement('img');
+			// 			this.img.setAttribute('class','rounded-circle img-fluid img-raised')
+			// 			this.img.src = data[i].profile.img;
+			// 			this.pseudonyme = document.createElement('p');
+			// 			this.pseudonyme.setAttribute('class','category text-primary');
+			// 			this.pseudonyme.innerHTML = data[i].profile.pseudonyme;
+			// 			this.work = document.createElement('p');
+			// 			this.work.setAttribute('class','category');
+			// 			this.work.innerHTML = data[i].profile.work;
+			// 			this.about = document.createElement('p');
+			// 			this.about.setAttribute('class','description');
+			// 			this.about.innerHTML = data[i].profile.about;
+			// 			this.profile = document.createElement('a');
+			// 			this.profile.setAttribute('class','btn btn-primary btn-icon btn-icon-mini btn-round')
+			// 			this.profile.setAttribute('href', '/profile/' + data[i].profile.pseudonyme);
+			// 			this.profile.setAttribute('rel', 'tooltip"');
+			// 			this.profile.setAttribute('data-original-title', data[i].profile.pseudonyme + "'s profile");
+			// 			this.profile.setAttribute('data-placement', 'bottom');
+			// 			this.profileIcon = document.createElement('i')
+			// 			this.profileIcon.setAttribute('class', 'fa fa-user-circle-o');
+			// 			this.profile.appendChild(this.profileIcon)
+			// 			this.chat = document.createElement('a');
+			// 			this.chat.setAttribute('class','btn btn-success btn-icon btn-icon-mini btn-round')
+			// 			this.chat.setAttribute('href', '/chat/' + data[i].profile.pseudonyme);
+			// 			this.chat.setAttribute('rel', 'tooltip"');
+			// 			this.chat.setAttribute('data-original-title','chat with ' + data[i].profile.pseudonyme);
+			// 			this.chat.setAttribute('data-placement', 'bottom');
+			// 			this.chatIcon = document.createElement('i')
+			// 			this.chatIcon.setAttribute('class', 'fa fa-comments');
+			// 			this.chat.appendChild(this.chatIcon)
+			// 			this.remove = document.createElement('a');
+			// 			this.remove.setAttribute('class','btn btn-danger btn-icon btn-icon-mini btn-round')
+			// 			this.remove.setAttribute('href', '/remove/' + data[i]._id);
+			// 			this.chat.setAttribute('rel', 'tooltip"');
+			// 			this.chat.setAttribute('data-original-title','Remove ' + data[i].profile.pseudonyme + 'from friends');
+			// 			this.chat.setAttribute('data-placement', 'bottom');
+			// 			this.removeIcon = document.createElement('i')
+			// 			this.removeIcon.setAttribute('class', 'fa fa-user-times');
+			// 			this.remove.appendChild(this.removeIcon)
+			// 			this.container.appendChild(this.user);
+			// 			this.user.appendChild(this.img);
+			// 			this.user.appendChild(this.pseudonyme);
+			// 			this.user.appendChild(this.work);
+			// 			this.user.appendChild(this.about);
+			// 			this.user.appendChild(this.profile);
+			// 			this.user.appendChild(this.chat);
+			// 			this.user.appendChild(this.remove);
+			// 			friends.appendChild(this.container);
+			// 		}
+			// 	};
+			//
+			// 	$('#search').keyup(function() {
+			// 		setTimeout(function () {
+			// 			var friendsSearch = $('#search').val();
+			//
+			// 			$.post( "/friendsSearch", {friendsSearch : friendsSearch} , function( data ) {
+			// 				console.log(data);
+			// 				friends.innerHTML = "";
+			// 				if (data.length < 1) {
+			// 					// alert('yo')
+			// 					friends.innerHTML ='<h3 class="text-primary" style="text-align: center;">Sorry no friends with this username</h3>';
+			// 				}
+			// 				new Friends(data);
+			// 			});
+			// 		}, 500);
+			// 	})
+			// });
+		</script>
+
+    </div>
+</body>
+<% include ./partials/footer %>
+
+</html>

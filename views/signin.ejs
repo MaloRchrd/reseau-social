@@ -1,0 +1,22 @@
+
+<html lang="en">
+
+<head>
+    <% include ./partials/head %>
+	<title>Login Page</title>
+</head>
+
+
+<body class="login-page">
+    <!-- Navbar -->
+    <% include ./partials/nav %>
+	<% include ./partials/warning %>
+    <!-- End Navbar -->
+	<!-- show any messages that come back with authentication -->
+    <div class="page-header" filter-color="orange">
+        <div class="page-header-image" style="background-image:url(https://source.unsplash.com/category/nature/daily)"></div>
+        <% include ./partials/signin-form %>
+    </div>
+</body>
+<% include ./partials/footer %>
+</html>

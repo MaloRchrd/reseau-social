@@ -1,0 +1,70 @@
+<html lang="en">
+
+<head>
+    <% include ./partials/head %>
+	<title>Community</title>
+</head>
+
+<body class="landing-page">
+	<% include ./partials/nav-connected %>
+	<div class="page-header page-header-small">
+		<!-- <div class="page-header-image" data-parallax="true" style="background-image: url('/img/bg-team.jpg');height:100%;">
+		</div> -->
+		<% if (friendRequest.length <  1) { %>
+		<div class="page-header-image" data-parallax="true" style="background-image: url('/img/bg-team.jpg'); height:100%!important;">
+		</div>
+		<div class="container">
+			<div class="content-center">
+				<h1 class="title">No more friend request  </h1>
+					 <p><br> Find more in the community </p>
+					 <a href="/community/" class="btn btn-primary btn-lg">Community</a>
+
+			</div>
+			</div>
+		</div>
+		<% } else{ %>
+			<div class="page-header-image" data-parallax="true" style="background-image: url('/img/bg-team.jpg');">
+			</div>
+			<div class="container">
+				<div class="content-center">
+					<h1 class="title">Friend request </h1>
+				</div>
+				</div>
+			</div>
+			<div class="section section-team text-center ">
+            <div class="container">
+                <!-- <h2 class="title">Here is our team</h2> -->
+                <div class="team">
+                    <div class="row">
+						<% for (var i = 0; i < friendRequest.length; i++) { %>
+							<div class="col-md-4">
+	                            <div class="team-player">
+									<img src="<%= friendRequest[i].profile.img %>" alt="Thumbnail Image" class="rounded-circle img-fluid img-raised">
+									<br>
+									<br>
+	                                <p class="category text-primary"><em><%=  friendRequest[i].profile.pseudonyme %></em></p>
+									<p class="category"><%=  friendRequest[i].profile.work %></p>
+	                                <p class="description"><%=  friendRequest[i].profile.about %></p>
+
+									<a href="/accept/<%=  friendRequest[i]._id %>" class="btn btn-primary btn-round btn-lg">accept</a>
+									<br>
+									<br>
+
+	                            </div>
+	                        </div>
+					   <% } %>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+		<% } %>
+
+
+		<% include ./partials/footer-nav %>
+
+    </div>
+</body>
+<% include ./partials/footer %>
+
+</html>

@@ -3,15 +3,13 @@
   "version": "1.0.0",
   "description": "reseau social ifocop dev JS",
   "main": "app.js",
-  "scripts": {
-    "start": "node app.js"
-  },
   "author": "Malo Richard",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.17.2",
     "connect-flash": "^0.1.1",
+    "connect-redis": "^3.3.0",
     "cookie-parser": "^1.4.3",
     "ejs": "^2.5.6",
     "express": "^4.15.3",

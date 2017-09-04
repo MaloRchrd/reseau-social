@@ -3,8 +3,9 @@ const express = require('express');
 const moment = require('moment');
 const bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
+var session = require('express-session');
 const port     = process.env.PORT || 3000;
-
+var RedisStore = require('connect-redis')(session);
 const mongoose = require('mongoose');
 const flash    = require('connect-flash');
 const passport = require('passport')
@@ -44,20 +45,35 @@ app.use( bodyParser.json() );       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 	extended: true
 }));
+app.use(session({
+	// store: new RedisStore({}),
+  	secret: 'IfocopIsMagic',
+  	resave: true,
+  	saveUninitialized: true,
+}));
+app.use(passport.initialize());
+app.use(passport.session({secret:'IfocopIsMagic'})); // persistent login sessions
+app.use(flash());
+
+
+
 
 // old express-session
-app.use(require('express-session')({
-  secret: 'IfocopIsMagic',
-  resave: true,
-  saveUninitialized: true
-}));
+// app.use(session({
+//   	secret: 'IfocopIsMagic',
+//   	resave: true,
+//   	saveUninitialized: true,
+//   	cookie:{
+//     	secure: true
+//     },
+// 	store: new RedisStore()
+// }));
+
 
 
 //passport init
 // app.use(session({ secret: 'IfocopIsMagic' })); // session secret
-app.use(passport.initialize());
-app.use(passport.session()); // persistent login sessions
-app.use(flash());
+
 
 
 

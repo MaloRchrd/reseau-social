@@ -27,7 +27,7 @@ var configDB = require('./config/db.js');
  require('./config/passport')(passport);
 
 
-mongoose.connect(configDB.url,{
+mongoose.connect(configDB.MONGODB_URI,{
   useMongoClient: true,
   /* other options */
 });

@@ -32,7 +32,14 @@ router.get('/contact', function(req, res) {
 });
 
 
-
+router.get('/messages',isLoggedIn, function(req, res) {
+	User.find({ _id: req.user._id }, function (err, users) {
+		User.populate(users,{path:'profile.friends'},function(err, users) {
+			// res.render('friends',{friends: users[0].profile.friends})
+			res.render('message',{user : req.user, friends: users[0].profile.friends});
+		});
+	});
+});
 
 
 // |¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯|

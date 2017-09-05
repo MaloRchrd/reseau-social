@@ -1,0 +1,53 @@
+<% if (friends.length <  1) { %>
+<div class="page-header-image" data-parallax="true" style="background-image: url('/img/bg-team.jpg'); height:100%!important;">
+</div>
+<div class="container">
+	<div class="content-center">
+		<h1 class="title">No friend yet  </h1>
+			 <p><br> Find some in the community </p>
+			 <a href="/community/" class="btn btn-primary btn-lg">Community</a>
+
+	</div>
+	</div>
+</div>
+<% } else{ %>
+	<div class="section section-team text-center ">
+	<div class="container">
+		<div class="input-group form-group-no-border ">
+			<input id="search" type="text" class="form-control" placeholder="Search by username">
+			<span class="input-group-addon">
+				<i class="now-ui-icons ui-1_zoom-bold" style="color:#fff"></i>
+			</span>
+		</div>
+		<!-- <h2 class="title">Here is our team</h2> -->
+		<div class="team">
+			<div id="friends" class="row">
+
+			</div>
+		</div>
+	</div>
+</div>
+<% } %>
+
+
+<script
+  src="https://code.jquery.com/jquery-3.2.1.js"
+  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+  crossorigin="anonymous"></script>
+  <script src="/js/friends.js" type="text/javascript"></script>
+  <script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function(event) {
+	  $.post( "/friendsSearch", {friendsSearch : ''} , function( data ) {
+		  console.log(data);
+		  friends.innerHTML = "";
+		  if (data.length < 1) {
+			  // alert('yo')
+			  friends.innerHTML ='<h3 class="text-primary" style="text-align: center;">Sorry no friends with this username</h3>';
+		  }
+		  new Friends(data);
+	  });
+
+	});
+
+
+  </script>

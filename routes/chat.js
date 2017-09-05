@@ -14,7 +14,7 @@ var User = require('../app/models/user');
 // var io = require('socket.io').listen(server);  //pass a http.Server instance
 // server.listen(80);  //listen on port 80
 
-var server = app.listen(3000);
+var server = app.listen(7777);
 var io = require('socket.io').listen(server);  //pass a http.Server instance
 
 var fs = require('fs');

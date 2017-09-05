@@ -4,18 +4,19 @@ const moment = require('moment');
 const bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
-const port     = process.env.PORT || 8080;
 var RedisStore = require('connect-redis')(session);
 const mongoose = require('mongoose');
 const flash    = require('connect-flash');
 const passport = require('passport')
   , LocalStrategy = require('passport-local').Strategy;
 
-// old
+
 var db = require('./db');
+// old
 // const mongo = require('./db'); // old withour mongoose
 
 const app = express();
+app.set('port', (process.env.PORT || 5000));
 
 // const io = require('socket.io');
 // var ioServer = io(server);
@@ -106,4 +107,6 @@ app.get('*',  function(req, res) {
   res.render('404');
 });
 
-app.listen(port);
+app.listen(app.get('port'), function() {
+  console.log('Node app is running on port', app.get('port'));
+});

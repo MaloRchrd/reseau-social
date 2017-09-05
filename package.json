@@ -6,7 +6,8 @@
   "author": "Malo Richard",
   "license": "ISC",
   "scripts": {
-     "start": "node app.js"
+    "start": "node app.js",
+    "test": "node test.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

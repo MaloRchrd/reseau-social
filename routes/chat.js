@@ -1,12 +1,14 @@
 
 const express = require('express');
-const app = express();
+// const app = express();
 const router = express.Router();
-// var path = require('path');
+var path = require('path');
 // var server = require('http').createServer(app);
-// const io = require('socket.io');
+// const socketIO = require('socket.io');
 // var ioServer = io(server);
 var User = require('../app/models/user');
+var app = require('../app');
+
 
 // var app = require('http').createServer(handler)
 // var http = require('http');
@@ -14,13 +16,18 @@ var User = require('../app/models/user');
 // var io = require('socket.io').listen(server);  //pass a http.Server instance
 // server.listen(80);  //listen on port 80
 
-// var server = app.listen( );
-var io = require('socket.io').listen(app.get('port'));  //pass a http.Server instance
+// var server = app.listen(5000);
+// var io = require('socket.io').listen(server);  //pass a http.Server instance
+
+
+// const io = socketIO(router);
+
+
+
 
 var fs = require('fs');
 
 // Chatroom
-
 
 router.get('/',isLoggedIn,function(req,res){
 
@@ -28,32 +35,9 @@ router.get('/',isLoggedIn,function(req,res){
 
 });
 
-// function handler (req, res) {
-//   fs.readFile(__dirname + '/chat.html',
-//   function (err, data) {
-//     if (err) {
-//       res.writeHead(500);
-//       return res.end('Error loading index.html');
-//     }
-//
-//     res.writeHead(200);
-//     res.end(data);
-//   });
-// }
-
-// io.on('connection', function (socket) {
-//   socket.emit('news', { hello: 'world' });
-//   socket.on('my other event', function (data) {
-//     console.log(data);
-//   });
-// });
 
 var numUsers = 0;
-//
-// router.get('/', function(req, res) {
-//     res.render('chat',{user : req.user});
-// });
-//
+
 io.on('connection', function (socket) {
   var addedUser = false;
 

@@ -22,11 +22,12 @@
     "moment": "^2.18.1",
     "mongodb": "^2.2.31",
     "mongoose": "^4.11.7",
+    "nodemailer": "^4.1.0",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "passport.socketio": "^3.7.0",
     "socket.io": "^2.0.3"
-	},
+  },
   "engines": {
     "node": "6.9.1"
   }

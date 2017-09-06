@@ -8,13 +8,13 @@ const flash    = require('connect-flash');
 const passport = require('passport')
   , LocalStrategy = require('passport-local').Strategy;
 
-var db = require('./db');
+// var db = require('./db');
 var express = require('express'),
     app = module.exports.app = express();
 
 var http = require('http');
 var server = http.createServer(app);
-var io = require('socket.io').listen(server);  //pass a http.Server instance
+var io = require('socket.io').listen(server);
 server.listen(process.env.PORT || 3000);
 
 
@@ -37,10 +37,12 @@ app.set('view engine', 'ejs');
 app.use(express.static(__dirname+ '/public'));
 
 
+
 app.use(require('cookie-parser')());
-app.use( bodyParser.json() );       // to support JSON-encoded bodies
+app.use( bodyParser.json({limit: '50mb'}) );       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
-	extended: true
+	extended: true,
+	limit:'50mb'
 }));
 app.use(session({
 	// store: new RedisStore({}),

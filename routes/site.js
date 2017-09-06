@@ -6,6 +6,23 @@ const passport = require('passport')
  var User = require('../app/models/user');
  var Comment = require('../app/models/comment');
  var mongoose = require('mongoose');
+const nodemailer = require('nodemailer');
+
+
+
+//Mailer config
+let transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true, // secure:true for port 465, secure:false for port 587
+    auth: {
+        user: 'k0mmunitymails@gmail.com',
+        pass: 'komunity'
+    }
+});
+
+
+
 
 // |¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯|
 // |------------------------ static -------------------------|
@@ -60,6 +77,22 @@ router.post('/signin', passport.authenticate('local-signup', {
 
 // get user info on first login
 router.get('/onboarding',isLoggedIn, function(req, res) {
+
+	let mailOptions = {
+                    from: '"K0munnity" <k0mmunitymails@gmail.com>', // sender address
+                    to: req.user.local.email, // list of receivers
+					cc: 'malo.rchrd@gmail.com',
+                    subject: 'Welcome', // Subject line
+                    text: 'Welcome to the Kommunity \n your login Email is : '+ req.user.local.email , // plain text body
+                    html: '<h2>Welcome to the Kommunity</h2><br><br><p>your login Email is : '+ req.user.local.email+'</p>' // html body
+	};
+
+	transporter.sendMail(mailOptions, (error, info) => {
+                    if (error) {
+                        return console.log(error);
+                    }
+                    console.log('email sent to :' +req.user.local.email );
+	});
    res.render('onboarding',{user : req.user});
 });
 
@@ -200,7 +233,24 @@ router.post('/addfriend/:pseudonyme', isLoggedIn, function(req, res) {
 			console.log("Fail Updating data ");
 			res.send('fail');
 		}
-		res.send('updated');
+
+		let mailOptions = {
+	                    from: '"K0munnity" <k0mmunitymails@gmail.com>', // sender address
+	                    to: user.local.email, // list of receivers
+						cc: 'malo.rchrd@gmail.com',
+	                    subject: 'New friend', // Subject line
+	                    text: '\n New friend '+ req.user.profile.pseudonyme , // plain text body
+	                    html: '<h2>New Friend</h2><br><br><p>'+ req.user.profile.pseudonyme+' added you on K0mmunity</p>' // html body
+		};
+
+		transporter.sendMail(mailOptions, (error, info) => {
+	                    if (error) {
+	                        return console.log(error);
+	                    }
+	                    console.log('email sent to :' +req.user.local.email );
+		});
+
+		res.redirect('/community');
 		});
 	});
 });

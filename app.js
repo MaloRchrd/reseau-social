@@ -15,7 +15,7 @@ var express = require('express'),
 var http = require('http');
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);  //pass a http.Server instance
-server.listen(5000);
+server.listen(process.env.PORT || 3000);
 
 
 
@@ -27,6 +27,8 @@ mongoose.connect(configDB.MONGODB_URI,{
   useMongoClient: true,
   /* other options */
 });
+
+
 
 
 
@@ -58,9 +60,6 @@ var site = require('./routes/site');
 // var chat = require('./routes/chat')(app,io);
 
 app.use("/", site);
-
-
-
 
 
 

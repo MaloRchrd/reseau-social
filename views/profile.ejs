@@ -153,9 +153,8 @@
 $( document ).ready(function() {
 	var commentsSection = document.querySelector('#commentsSection');
 	var userID = '<%= user._id %>';
-
-
-
+	var logUser = '<%= logUser._id %>';
+	console.log(logUser);
 
 
 	var Comments = function(data) {
@@ -178,18 +177,21 @@ $( document ).ready(function() {
 			this.reply.setAttribute('class','btn btn-success btn-icon  btn-icon-mini btn-round');
 			this.replyIcon = document.createElement('i');
 			this.replyIcon.setAttribute('class', 'fa  fa-reply');
-			this.remove = document.createElement('a');
-			this.remove.setAttribute('class', 'btn btn-danger btn-icon  btn-icon-mini btn-round');
-			this.removeIcon = document.createElement('i');
-			this.removeIcon.setAttribute('class', 'fa  fa-times');
 			this.row.appendChild(this.commentContainer);
 			this.commentContainer.appendChild(this.authorImg);
 			this.commentContainer.appendChild(this.author);
 			this.commentContainer.appendChild(this.comment);
 			this.reply.appendChild(this.replyIcon);
 			this.commentContainer.appendChild(this.reply);
-			this.remove.appendChild(this.removeIcon);
-			this.commentContainer.appendChild(this.remove);
+			if (data[i].comment.author[0]._id === logUser) {
+				this.remove = document.createElement('a');
+				this.remove.setAttribute('class', 'btn btn-danger btn-icon  btn-icon-mini btn-round');
+				this.remove.setAttribute('href','/remove/comment/'+data[i]._id);
+				this.removeIcon = document.createElement('i');
+				this.removeIcon.setAttribute('class', 'fa  fa-times');
+				this.remove.appendChild(this.removeIcon);
+				this.commentContainer.appendChild(this.remove);
+			}
 			commentsSection.appendChild(this.row);
 			//add reply loop
 		}

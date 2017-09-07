@@ -177,7 +177,8 @@ router.get('/profile', isLoggedIn, function(req, res) {
 			console.log(err);
 		}
 		res.render('profile', {
-			user : user
+			user : user,
+			logUser: req.user
         });
 	})
 });
@@ -200,15 +201,20 @@ router.get('/profile/:pseudonyme',isLoggedIn, function(req, res) {
 		if (err) {
 			console.log(err);
 		}
-		var friends = req.user.profile.friends;
-		var weAreFriends = friends.indexOf( new mongoose.Types.ObjectId(user._id));
+		if (user) {
 
-		// if friends render template with comments
-		if (weAreFriends != -1) {
-			res.render('profile', {user : user});
+			var friends = req.user.profile.friends;
+			var weAreFriends = friends.indexOf( new mongoose.Types.ObjectId(user._id));
+
+			// if friends render template with comments
+			if (weAreFriends != -1) {
+				res.render('profile', {user : user, logUser: req.user});
+			}else {
+				res.render('user', {user : user, logUser: req.user});
+
+			}
 		}else {
-			res.render('user', {user : user});
-
+			res.redirect('/profile');
 		}
 	});
 });
@@ -385,6 +391,19 @@ router.post('/communitySearch', function(req, res) {
 		res.json(communitybutNotMe);
 
 	});
+});
+
+
+// To finish
+
+router.get('/remove/comment/:id', function (req,res) {
+	var id = new mongoose.Types.ObjectId(req.params.id);
+	Comment.find({"_id": id}).remove(function() {
+		console.log('removed');
+		res.redirect('/community');
+	})
+		// console.log(comments);
+
 });
 
 
